@@ -1,4 +1,3 @@
-
 name: Frontend CI/CD
 
 on:
@@ -15,10 +14,11 @@ jobs:
       - name: Cloner le code
         uses: actions/checkout@v4
 
-      - name: Installer Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      # Vérifie que Node.js est installé sur le runner (à installer manuellement une fois)
+      - name: Vérifier Node.js installé
+        run: |
+          node -v
+          npm -v
 
       - name: Installer les dépendances
         run: npm install
