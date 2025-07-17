@@ -22,6 +22,9 @@ describe('AppComponent', () => {
 
 
 
+
+
+
   
 
   it(`should have as title 'angular-pipeline-test'`, () => {
