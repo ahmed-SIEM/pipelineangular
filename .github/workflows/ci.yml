@@ -11,14 +11,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Cloner le code
-        uses: actions/checkout@v4
-
-      # Vérifie que Node.js est installé sur le runner (à installer manuellement une fois)
-      - name: Vérifier Node.js installé
+      - name: Debug PATH et Node version
         run: |
+          echo "PATH=$PATH"
+          which node
           node -v
           npm -v
+
+      - name: Cloner le code
+        uses: actions/checkout@v4
 
       - name: Installer les dépendances
         run: npm install
