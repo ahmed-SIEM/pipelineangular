@@ -19,7 +19,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy the built Angular app from the previous stage
-COPY --from=build /app/dist/fuse /usr/share/nginx/html
+COPY --from=build /app/dist/angular-pipeline-test /usr/share/nginx/html
 
 # Optional: Replace default Nginx config (if needed)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
