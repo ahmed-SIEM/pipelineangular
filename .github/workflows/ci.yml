@@ -67,4 +67,14 @@ jobs:
 
       - name: Update image tag in frontend manifest
         run: |
-          sed -i "s|image:.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend-app:${{ github.sha }}|" man_*
+          sed -i "s|image:.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend-app:${{ github.sha }}|" manifests/frontend/deployment.yaml
+          cd manifests
+          git config user.name "ahmed-SIEM"
+          git config user.email "ahmedsouid008@gmail.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update frontend image to ${{ github.sha }}"
+            git push
+          fi
