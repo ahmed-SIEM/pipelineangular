@@ -57,3 +57,14 @@ jobs:
             -t ${{ secrets.DOCKER_USERNAME }}/frontend-app:${{ github.sha }} \
             -t ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest \
             --push .
+
+      - name: Cloner le repo k8s-manifests
+        uses: actions/checkout@v4
+        with:
+          repository: ahmed-SIEM/K8s-manifests
+          path: manifests
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Update image tag in frontend manifest
+        run: |
+          sed -i "s|image:.*|image: ${{ secrets.DOCKER_USERNAME }}/frontend-app:${{ github.sha }}|" man_*
